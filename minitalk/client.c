@@ -6,7 +6,7 @@
 /*   By: gebuqaj <gebuqaj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:31:58 by gebuqaj           #+#    #+#             */
-/*   Updated: 2024/01/03 13:57:02 by gebuqaj          ###   ########.fr       */
+/*   Updated: 2023/12/27 12:00:09 by gebuqaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	send_msg(int pid, char c)
 	shift = 0;
 	while (shift < 8)
 	{
-		if ((c << shift) & 1) //01100001 & 00000001
+		if ((c << shift) & 128)
 			kill(pid, SIGUSR2);
 		else
 			kill(pid, SIGUSR1);
@@ -75,4 +75,3 @@ int	main(int argc, char **argv)
 	send_msg(pid_target, '\0');
 	return (0);
 }
-
