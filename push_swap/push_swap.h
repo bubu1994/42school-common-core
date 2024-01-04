@@ -6,7 +6,7 @@
 /*   By: gebuqaj <gebuqaj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 10:00:09 by gebuqaj           #+#    #+#             */
-/*   Updated: 2024/01/03 13:34:59 by gebuqaj          ###   ########.fr       */
+/*   Updated: 2024/01/04 14:02:25 by gebuqaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,16 @@ void	rrotate_b(Nombre_l **pile);
 void	rrotate_ab(Nombre_l **a_pile, Nombre_l **b_pile);
 
 void	tri_2(Nombre_l **a_pile);
+void	tri_3(Nombre_l **a_pile);
+void	tri_4(Nombre_l **a_pile, Nombre_l **b_pile);
+void	tri_5(Nombre_l **a_pile, Nombre_l **b_pile);
+
+
+
+int	get_max(Nombre_l **pile);
+int	get_min(Nombre_l **pile);
+int	pile_is_sorted(Nombre_l **pile);
+
 
 
 #endif

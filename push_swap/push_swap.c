@@ -6,7 +6,7 @@
 /*   By: gebuqaj <gebuqaj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 09:59:32 by gebuqaj           #+#    #+#             */
-/*   Updated: 2024/01/03 13:37:08 by gebuqaj          ###   ########.fr       */
+/*   Updated: 2024/01/04 14:02:06 by gebuqaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,14 @@ int	main(int argc, char **argv)
 		return (0);
 	a_pile = create_pile(argc, argv);
 	b_pile = NULL;
-
 	if (argc == 3)
 		tri_2(&a_pile);
-
+	else if (argc == 4)
+		tri_3(&a_pile);
+	else if (argc == 5)
+		tri_4(&a_pile, &b_pile);
+	else if (argc == 6)
+		tri_5(&a_pile, &b_pile);
 
 
 	printf("\n------- \npile a:\n");

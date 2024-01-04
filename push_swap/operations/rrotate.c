@@ -6,7 +6,7 @@
 /*   By: gebuqaj <gebuqaj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:16:50 by gebuqaj           #+#    #+#             */
-/*   Updated: 2024/01/03 13:16:45 by gebuqaj          ###   ########.fr       */
+/*   Updated: 2024/01/04 11:00:02 by gebuqaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	rrotate_a(Nombre_l **pile)
 	if (*pile == NULL || (*pile)->next == NULL)
 		return ;
 	rrotate(pile);
-	write(1, "rra\n", 3);
+	write(1, "rra\n", 4);
 }
 
 void	rrotate_b(Nombre_l **pile)
@@ -51,7 +51,7 @@ void	rrotate_b(Nombre_l **pile)
 	if (*pile == NULL || (*pile)->next == NULL)
 		return ;
 	rrotate(pile);
-	write(1, "rrb\n", 3);
+	write(1, "rrb\n", 4);
 }
 
 void	rrotate_ab(Nombre_l **a_pile, Nombre_l **b_pile)
@@ -61,5 +61,5 @@ void	rrotate_ab(Nombre_l **a_pile, Nombre_l **b_pile)
 		return ;
 	rrotate(a_pile);
 	rrotate(b_pile);
-	write(1, "rrr\n", 3);
+	write(1, "rrr\n", 4);
 }
