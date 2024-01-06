@@ -6,23 +6,23 @@
 /*   By: gebuqaj <gebuqaj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 13:23:43 by gebuqaj           #+#    #+#             */
-/*   Updated: 2024/01/04 14:25:03 by gebuqaj          ###   ########.fr       */
+/*   Updated: 2024/01/06 15:22:29 by gebuqaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	tri_2(Nombre_l **a_pile)
+void	tri_2(t_list **a_pile)
 {
 	if ((*a_pile)->nb > (*a_pile)->next->nb)
 		swap_a(*a_pile);
 }
 
-void	tri_3(Nombre_l **a_pile)
+void	tri_3(t_list **a_pile)
 {
-	Nombre_l	*scan;
-	int			max;
-	int			min;
+	t_list	*scan;
+	int		max;
+	int		min;
 
 	scan = *a_pile;
 	max = get_max(&scan);
@@ -43,38 +43,24 @@ void	tri_3(Nombre_l **a_pile)
 	}
 }
 
-void	tri_4(Nombre_l **a_pile, Nombre_l **b_pile)
+void	trier(t_list **a_pile, t_list **b_pile, int size)
 {
-	Nombre_l	*scan;
-	int			min;
+	int	n;
 
-	scan = *a_pile;
-	min = get_min(&scan);
-	while (scan)
+	n = size;
+	if (n == 2)
+		tri_2(a_pile);
+	while (n > 3)
 	{
-		if (scan->nb == min && scan->pos == 3)
-			rrotate_a(a_pile);
-		if (scan->nb == min && scan->pos == 4)
-			rrotate_a(a_pile);
-		scan = scan->next;
+		put_min_at_top(a_pile);
+		if (!pile_is_sorted(a_pile))
+			push_b(a_pile, b_pile);
+		n--;
 	}
-	if (!pile_is_sorted(a_pile))
-		push_b(a_pile, b_pile);
 	tri_3(a_pile);
-	push_a(b_pile, a_pile);
-}
-
-void	tri_5(Nombre_l **a_pile, Nombre_l **b_pile)
-{
-	Nombre_l	*scan;
-	int			max;
-	int			min;
-
-	scan = *a_pile;
-	max = get_max(&scan);
-	min = get_min(&scan);
-	while (scan)
+	while (!(n == size))
 	{
-		
+		push_a(b_pile, a_pile);
+		n++;
 	}
 }

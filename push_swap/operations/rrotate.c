@@ -6,18 +6,18 @@
 /*   By: gebuqaj <gebuqaj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:16:50 by gebuqaj           #+#    #+#             */
-/*   Updated: 2024/01/04 11:00:02 by gebuqaj          ###   ########.fr       */
+/*   Updated: 2024/01/06 15:22:11 by gebuqaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	rrotate(Nombre_l **pile)
+void	rrotate(t_list **pile)
 {
-	Nombre_l	*last;
-	Nombre_l	*avant_dernier;
-	Nombre_l	*actuel;
-	int			i;
+	t_list	*last;
+	t_list	*avant_dernier;
+	t_list	*actuel;
+	int		i;
 
 	if (*pile == NULL || (*pile)->next == NULL)
 		return ;
@@ -38,7 +38,7 @@ void	rrotate(Nombre_l **pile)
 	}
 }
 
-void	rrotate_a(Nombre_l **pile)
+void	rrotate_a(t_list **pile)
 {
 	if (*pile == NULL || (*pile)->next == NULL)
 		return ;
@@ -46,7 +46,7 @@ void	rrotate_a(Nombre_l **pile)
 	write(1, "rra\n", 4);
 }
 
-void	rrotate_b(Nombre_l **pile)
+void	rrotate_b(t_list **pile)
 {
 	if (*pile == NULL || (*pile)->next == NULL)
 		return ;
@@ -54,10 +54,10 @@ void	rrotate_b(Nombre_l **pile)
 	write(1, "rrb\n", 4);
 }
 
-void	rrotate_ab(Nombre_l **a_pile, Nombre_l **b_pile)
+void	rrotate_ab(t_list **a_pile, t_list **b_pile)
 {
-	if ((*a_pile == NULL || (*a_pile)->next == NULL) ||
-		(*a_pile == NULL || (*a_pile)->next == NULL))
+	if ((*a_pile == NULL || (*a_pile)->next == NULL)
+		|| (*a_pile == NULL || (*a_pile)->next == NULL))
 		return ;
 	rrotate(a_pile);
 	rrotate(b_pile);

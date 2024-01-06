@@ -6,16 +6,16 @@
 /*   By: gebuqaj <gebuqaj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 09:55:16 by gebuqaj           #+#    #+#             */
-/*   Updated: 2024/01/04 10:44:09 by gebuqaj          ###   ########.fr       */
+/*   Updated: 2024/01/06 15:21:47 by gebuqaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	get_max(Nombre_l **pile)
+int	get_max(t_list **pile)
 {
-	Nombre_l	*scan;
-	int			max;
+	t_list	*scan;
+	int		max;
 
 	scan = *pile;
 	max = scan->nb;
@@ -28,11 +28,11 @@ int	get_max(Nombre_l **pile)
 	return (max);
 }
 
-int	get_min(Nombre_l **pile)
+int	get_min(t_list **pile)
 {
-	Nombre_l	*scan;
-	int			min;
-	
+	t_list	*scan;
+	int		min;
+
 	scan = *pile;
 	min = scan->nb;
 	while (scan->next)
@@ -44,9 +44,9 @@ int	get_min(Nombre_l **pile)
 	return (min);
 }
 
-int	pile_is_sorted(Nombre_l **pile)
+int	pile_is_sorted(t_list **pile)
 {
-	Nombre_l	*scan;
+	t_list	*scan;
 
 	scan = *pile;
 	while (scan->next)
@@ -56,4 +56,27 @@ int	pile_is_sorted(Nombre_l **pile)
 		scan = scan->next;
 	}
 	return (1);
+}
+
+void	put_min_at_top(t_list **pile)
+{
+	t_list	*scan;
+	int		size;
+	int		min;
+
+	min = get_min(pile);
+	size = ft_lstsize(*pile);
+	scan = *pile;
+	while (scan && !(scan->nb == min && scan->pos == 1))
+	{
+		if (scan->nb == min)
+		{
+			if (scan->pos <= size / 2)
+				rotate_a(pile);
+			else
+				rrotate_a(pile);
+			scan = *pile;
+		}
+		scan = scan->next;
+	}
 }

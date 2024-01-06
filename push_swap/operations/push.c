@@ -6,21 +6,22 @@
 /*   By: gebuqaj <gebuqaj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 15:59:21 by gebuqaj           #+#    #+#             */
-/*   Updated: 2024/01/03 10:30:44 by gebuqaj          ###   ########.fr       */
+/*   Updated: 2024/01/06 15:16:45 by gebuqaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	ft_lstadd_front(Nombre_l **lst, Nombre_l *new)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
 	new->next = *lst;
 	*lst = new;
 }
 
-void	ft_delete_front(Nombre_l **lst)
+void	ft_delete_front(t_list **lst)
 {
-	Nombre_l	*tmp;
+	t_list	*tmp;
+
 	if (*lst == NULL)
 		return ;
 	tmp = *lst;
@@ -28,12 +29,12 @@ void	ft_delete_front(Nombre_l **lst)
 	free(tmp);
 }
 
-void	push(Nombre_l	**src, Nombre_l **dest)
+void	push(t_list	**src, t_list **dest)
 {
-	Nombre_l	*haut_pile;
-	Nombre_l	*actuel;
+	t_list	*haut_pile;
+	t_list	*actuel;
 
-	haut_pile = malloc(sizeof(Nombre_l));
+	haut_pile = malloc(sizeof(t_list));
 	if (!haut_pile || *src == NULL)
 		return ;
 	haut_pile->nb = (*src)->nb;
@@ -55,7 +56,7 @@ void	push(Nombre_l	**src, Nombre_l **dest)
 	}
 }
 
-void	push_a(Nombre_l **src, Nombre_l **dest)
+void	push_a(t_list **src, t_list **dest)
 {
 	if (*src == NULL)
 		return ;
@@ -63,7 +64,7 @@ void	push_a(Nombre_l **src, Nombre_l **dest)
 	write(1, "pa\n", 3);
 }
 
-void	push_b(Nombre_l **src, Nombre_l **dest)
+void	push_b(t_list **src, t_list **dest)
 {
 	if (*src == NULL)
 		return ;

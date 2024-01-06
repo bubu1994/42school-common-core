@@ -6,17 +6,17 @@
 /*   By: gebuqaj <gebuqaj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:54:38 by gebuqaj           #+#    #+#             */
-/*   Updated: 2024/01/03 09:07:50 by gebuqaj          ###   ########.fr       */
+/*   Updated: 2024/01/06 15:18:11 by gebuqaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
-	int	i;
-	int	sign;
-	int	nb;
+	int		i;
+	int		sign;
+	long	nb;
 
 	i = 0;
 	nb = 0;
@@ -38,18 +38,7 @@ int	ft_atoi(const char *str)
 	return (nb * sign);
 }
 
-Nombre_l	*ft_lstlast(Nombre_l *lst)
-{
-	while (lst != NULL)
-	{
-		if (lst->next == NULL)
-			return (lst);
-		lst = lst->next;
-	}
-	return (lst);
-}
-
-int	ft_lstsize(Nombre_l *lst)
+int	ft_lstsize(t_list *lst)
 {
 	int	i;
 
@@ -62,3 +51,70 @@ int	ft_lstsize(Nombre_l *lst)
 	return (i);
 }
 
+int	sizetab(const char *s, char c)
+{
+	int	i;
+	int	n;
+
+	i = 0;
+	n = 0;
+	while (s[i] != '\0')
+	{
+		while (s[i] == c && s[i] != '\0')
+			i++;
+		if (s[i] != '\0')
+			n++;
+		while (s[i] != c && s[i] != '\0')
+			i++;
+	}
+	return (n);
+}
+
+static char	*substr(char const *s, char c)
+{
+	int		i;
+	char	*str;
+	int		size;
+
+	i = 0;
+	size = 0;
+	while (s[size] != '\0' && s[size] != c)
+		size++;
+	str = malloc(sizeof(char) * (size + 1));
+	if (!str)
+		return (NULL);
+	while (s[i] != '\0' && i < size)
+	{
+		str[i] = s[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+
+char	**ft_split_m(char const *s, char c)
+{
+	char	**tab;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	tab = malloc(sizeof(char *) * (sizetab(s, c) + 1));
+	if (!tab)
+		return (NULL);
+	while (s[i] != '\0')
+	{
+		while (s[i] == c && s[i] != '\0')
+			i++;
+		if (s[i] != '\0')
+		{
+			tab[j] = substr(s + i, c);
+			j++;
+		}
+		while (s[i] != c && s[i] != '\0')
+			i++;
+	}
+	tab[j] = 0;
+	return (tab);
+}
