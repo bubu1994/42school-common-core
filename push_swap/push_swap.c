@@ -66,6 +66,8 @@ int	main(int argc, char **argv)
 	return (0);
 }
 /*
+
+//testpush
 #include <stdio.h>
 
 void	print_pile(t_list **pile)
