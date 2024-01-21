@@ -42,6 +42,7 @@ void	tri_3(t_list **a_pile)
 		scan = *a_pile;
 	}
 }
+/* very simple, but very weak algorithm
 
 void	trier(t_list **a_pile, t_list **b_pile, int size)
 {
@@ -64,3 +65,4 @@ void	trier(t_list **a_pile, t_list **b_pile, int size)
 		n++;
 	}
 }
+ */

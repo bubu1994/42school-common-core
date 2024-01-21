@@ -12,6 +12,20 @@
 
 #include "push_swap.h"
 
+#include <stdio.h>
+
+void	print_pile(t_list **pile)
+{
+	t_list	*scan;
+
+	scan = *pile;
+	while (scan)
+	{
+		printf("%d) %d\n", scan->pos, scan->nb);
+		scan = scan->next;
+	}
+}
+
 int	main_2(char **argv)
 {
 	t_list	*a_pile;
@@ -32,7 +46,7 @@ int	main_2(char **argv)
 	if (ft_lstsize(a_pile) == 2)
 		tri_2(&a_pile);
 	else
-		trier(&a_pile, &b_pile, ft_lstsize(a_pile));
+		turk_algo(&a_pile, &b_pile);
 	free_liste(a_pile);
 	free_liste(b_pile);
 	return (0);
@@ -60,24 +74,8 @@ int	main(int argc, char **argv)
 	if (argc == 3)
 		tri_2(&a_pile);
 	else
-		trier(&a_pile, &b_pile, ft_lstsize(a_pile));
+		turk_algo(&a_pile, &b_pile);
 	free_liste(a_pile);
 	free_liste(b_pile);
 	return (0);
 }
-/*
-
-//testpush
-#include <stdio.h>
-
-void	print_pile(t_list **pile)
-{
-	t_list	*scan;
-
-	scan = *pile;
-	while (scan)
-	{
-		printf("%d) %d\n", scan->pos, scan->nb);
-		scan = scan->next;
-	}
-} */

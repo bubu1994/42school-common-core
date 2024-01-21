@@ -20,6 +20,10 @@ typedef struct t_list
 {
 	int				nb;
 	int				pos;
+	int				cost;
+	int				op_id;
+	int				above_m;
+	struct t_list	*target;
 	struct t_list	*next;
 }	t_list;
 
@@ -48,10 +52,29 @@ void	rrotate_b(t_list **pile);
 void	rrotate_ab(t_list **a_pile, t_list **b_pile);
 void	tri_2(t_list **a_pile);
 void	tri_3(t_list **a_pile);
-void	trier(t_list **a_pile, t_list **b_pile, int size);
 int		get_max(t_list **pile);
 int		get_min(t_list **pile);
 int		pile_is_sorted(t_list **pile);
 void	put_min_at_top(t_list **pile);
+
+void	turk_algo(t_list **a_pile, t_list **b_pile);
+void	pushing_to_b(t_list **a_pile, t_list **b_pile);
+void	set_medians(t_list **pile);
+
+t_list	*get_max_target(t_list *elem, t_list **pile);
+t_list	*get_target(t_list *elem, t_list **b_pile);
+void	set_targets(t_list **a_pile, t_list **b_pile);
+int		max_of(int a, int b);
+void	get_min_cost_and_id(t_list *elem, int c, int id);
+void	set_costs_and_id(t_list **a_pile, t_list **b_pile);
+void	cost_push(t_list *elem, int a_size, int b_size);
+t_list	*elem_to_push(t_list **a_pile, t_list **b_pile);
+void	rr_and_ra_or_rb(t_list *elem, t_list **a_pile, t_list **b_pile);
+void	rra_and_rb(t_list *elem, t_list **a_pile, t_list **b_pile);
+void	ra_and_rrb(t_list *elem, t_list **a_pile, t_list **b_pile);
+void	rrr_and_rra_or_rrb(t_list *elem, t_list **a_pile, t_list **b_pile);
+void	set_targets_of_b(t_list **a_pile, t_list **b_pile);
+t_list	*get_target_of_b(t_list *elem, t_list **a_pile);
+t_list	*get_min_target(t_list *elem, t_list **pile);
 
 #endif

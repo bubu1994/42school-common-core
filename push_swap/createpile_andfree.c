@@ -37,7 +37,7 @@ void	free_ar(char **ar, int size)
 	free(ar);
 }
 
-t_list	*ajout_element_alafin(t_list *liste, int n, int index)
+t_list	*ajout_element_alafin(t_list *liste, int nombre, int index)
 {
 	t_list	*elem;
 	t_list	*fin;
@@ -45,7 +45,7 @@ t_list	*ajout_element_alafin(t_list *liste, int n, int index)
 	elem = malloc(sizeof(t_list));
 	if (!elem)
 		return (NULL);
-	elem->nb = n;
+	elem->nb = nombre;
 	elem->pos = index;
 	elem->next = NULL;
 	if (!liste)
