@@ -6,7 +6,7 @@
 /*   By: gebuqaj <gebuqaj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 13:23:43 by gebuqaj           #+#    #+#             */
-/*   Updated: 2024/01/07 08:37:21 by gebuqaj          ###   ########.fr       */
+/*   Updated: 2024/01/22 09:04:44 by gebuqaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,50 +40,5 @@ void	tri_3(t_list **a_pile)
 			scan = scan->next;
 		}
 		scan = *a_pile;
-	}
-}
-
-void	trier(t_list **a_pile, t_list **b_pile, int size)
-{
-	int	n;
-
-	n = size;
-	if (n == 2)
-		tri_2(a_pile);
-	while (n > 3)
-	{
-		put_min_at_top(a_pile);
-		if (!pile_is_sorted(a_pile))
-			push_b(a_pile, b_pile);
-		n--;
-	}
-	tri_3(a_pile);
-	while (!(n == size))
-	{
-		push_a(b_pile, a_pile);
-		n++;
-	}
-}
-
-void	put_min_at_top(t_list **pile)
-{
-	t_list	*scan;
-	int		size;
-	int		min;
-
-	min = get_min(pile);
-	size = ft_lstsize(*pile);
-	scan = *pile;
-	while (scan && !(scan->nb == min && scan->pos == 1))
-	{
-		if (scan->nb == min)
-		{
-			if (scan->pos <= size / 2)
-				rotate_a(pile);
-			else
-				rrotate_a(pile);
-			scan = *pile;
-		}
-		scan = scan->next;
 	}
 }
