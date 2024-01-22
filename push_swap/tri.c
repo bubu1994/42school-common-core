@@ -6,7 +6,7 @@
 /*   By: gebuqaj <gebuqaj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 13:23:43 by gebuqaj           #+#    #+#             */
-/*   Updated: 2024/01/06 15:22:29 by gebuqaj          ###   ########.fr       */
+/*   Updated: 2024/01/07 08:37:21 by gebuqaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,28 @@ void	trier(t_list **a_pile, t_list **b_pile, int size)
 	{
 		push_a(b_pile, a_pile);
 		n++;
+	}
+}
+
+void	put_min_at_top(t_list **pile)
+{
+	t_list	*scan;
+	int		size;
+	int		min;
+
+	min = get_min(pile);
+	size = ft_lstsize(*pile);
+	scan = *pile;
+	while (scan && !(scan->nb == min && scan->pos == 1))
+	{
+		if (scan->nb == min)
+		{
+			if (scan->pos <= size / 2)
+				rotate_a(pile);
+			else
+				rrotate_a(pile);
+			scan = *pile;
+		}
+		scan = scan->next;
 	}
 }
