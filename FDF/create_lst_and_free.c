@@ -6,7 +6,7 @@
 /*   By: gebuqaj <gebuqaj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:53:51 by gebuqaj           #+#    #+#             */
-/*   Updated: 2024/01/27 12:58:27 by gebuqaj          ###   ########.fr       */
+/*   Updated: 2024/01/31 12:13:18 by gebuqaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,32 @@ t_pos	*add_point_to_lst(t_pos *lst, int a, int b, int c)
 	return (lst);
 }
 
+void	set_downs_and_rights(t_pos **list)
+{
+	t_pos	*scan;
+	t_pos	*next_down;
+
+	scan = *list;
+	next_down = *list;
+	while (next_down->y == scan->y)
+		next_down = next_down->next;
+	while (next_down != NULL)
+	{
+		scan->down = next_down;
+		scan = scan->next;
+		next_down = next_down->next;
+	}
+	scan = *list;
+	while (scan->next != NULL)
+	{
+		if (scan->y == scan->next->y)
+			scan->right = scan->next;
+		else
+			scan->right = NULL;
+		scan = scan->next;
+	}
+}
+
 t_pos	*create_list_pos(int fd)
 {
 	char	*line;
@@ -69,15 +95,15 @@ t_pos	*create_list_pos(int fd)
 	t_pos	*lst;
 
 	lst = NULL;
-	y = 1;
+	y = 0;
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		tab = ft_split(line, ' ');
+		tab = ft_super_split(line, " \n");
 		i = 0;
 		while (tab[i] != NULL)
 		{
-			lst = add_point_to_lst(lst, i + 1, y, ft_atoi(tab[i]));
+			lst = add_point_to_lst(lst, i, y, ft_atoi(tab[i]));
 			i++;
 		}
 		y++;
@@ -85,5 +111,6 @@ t_pos	*create_list_pos(int fd)
 		free(line);
 		line = get_next_line(fd);
 	}
+	set_downs_and_rights(&lst);
 	return (lst);
 }

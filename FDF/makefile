@@ -10,11 +10,11 @@ INCLUDES = includes
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror -I${INCLUDES}
+FLAGS = -Wall -Wextra -Werror
 
 MAC_FWs = -framework OpenGL -framework AppKit
 
-SRC = fdf.c utils.c create_lst_and_free.c \
+SRC = fdf.c utils.c create_lst_and_free.c ft_super_split.c useless.c\
 	get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 
 OBJ = ${SRC:.c=.o}
@@ -22,7 +22,7 @@ OBJ = ${SRC:.c=.o}
 all:	${NAME}
 
 ${NAME}:	${OBJ} ${MLX_A} ${LIBFT_A}
-	${CC} ${FLAGS} ${OBJ} -L${MLX} -lmlx -L${LIBFT} -lft ${MAC_FWs} -o ${NAME}
+	${CC} ${FLAGS} -I./includes/fdf.h ${OBJ}  -L${MLX} -lmlx -L${LIBFT} -lft ${MAC_FWs} -o ${NAME}
 	
 ${MLX_A}:
 	make -s -C ${MLX}
