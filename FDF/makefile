@@ -1,41 +1,34 @@
-NAME = fdf
+NAME =		fdf
 
-MLX = minilibx/
-MLX_A = minilibx/libmlx.a
+CC =		gcc
 
-LIBFT = libft/
-LIBFT_A = libft/libft.a
+FLAGS =		-Wall -Werror -Wextra
 
-INCLUDES = includes
+MAC_FW =	-framework OpenGL -framework Appkit
 
-CC = gcc
-
-FLAGS = -Wall -Wextra -Werror
-
-MAC_FWs = -framework OpenGL -framework AppKit
-
-SRC = fdf.c utils.c create_lst_and_free.c ft_super_split.c useless.c\
-	get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
+SRC = 		srcs/main_fdf.c srcs/utils.c srcs/draw.c srcs/env_init.c srcs/pull_color.c \
+			srcs/ft_super_split.c srcs/ft_weak_ftoa.c srcs/draw_black.c \
+			srcs/handle_events.c srcs/events_instructions.c srcs/check_file.c
 
 OBJ = ${SRC:.c=.o}
 
+%.o: %.c
+	${CC} ${FLAGS} -c $< -o $@
+
+${NAME}: ${OBJ}
+	make -s -C libft
+	make -s -C minilibx
+	${CC} ${OBJ} ./libft/libft.a ./minilibx/libmlx.a ${MAC_FW} -o ${NAME}
+
 all:	${NAME}
 
-${NAME}:	${OBJ} ${MLX_A} ${LIBFT_A}
-	${CC} ${FLAGS} -I./includes/fdf.h ${OBJ}  -L${MLX} -lmlx -L${LIBFT} -lft ${MAC_FWs} -o ${NAME}
-	
-${MLX_A}:
-	make -s -C ${MLX}
-
-${LIBFT_A}:
-	make -s -C ${LIBFT}
-
 clean:
-	make clean -C ${LIBFT}
-	make clean -C ${MLX}
+	make clean -s -C libft
+	make clean -s -C minilibx
 	rm -f ${OBJ}
 
 fclean:	clean
+	make fclean -s -C libft
 	rm -f ${NAME}
 
 re: fclean all

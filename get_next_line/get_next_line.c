@@ -6,7 +6,7 @@
 /*   By: gebuqaj <gebuqaj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 09:36:02 by gebuqaj           #+#    #+#             */
-/*   Updated: 2023/12/07 16:21:08 by gebuqaj          ###   ########.fr       */
+/*   Updated: 2024/02/07 17:18:04 by gebuqaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ char	*get_next_line(int fd)
 	str = trim_untilnewline(str);
 	return (line);
 }
-/*
+
 #include <fcntl.h>
 #include <stdio.h>
 int	main(void)
@@ -131,4 +131,4 @@ int	main(void)
 	close(fd);
 	return (0);
 }
-*/
+

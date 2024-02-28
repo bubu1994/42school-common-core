@@ -1,33 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gebuqaj <gebuqaj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 09:36:02 by gebuqaj           #+#    #+#             */
-/*   Updated: 2024/01/25 13:32:32 by gebuqaj          ###   ########.fr       */
+/*   Created: 2024/02/07 15:56:59 by gebuqaj           #+#    #+#             */
+/*   Updated: 2024/02/21 16:10:20 by gebuqaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-char	*trim_untilnewline(char *str)
+char	*ft_strjoin_gnl(char *s1, char *s2)
 {
 	int		i;
-	int		k;
+	int		j;
+	char	*str;
+
+	i = 0;
+	j = 0;
+	if (!s1)
+		s1 = ft_calloc(1, 1);
+	str = malloc((ft_strlen((char *) s1) + ft_strlen((char *) s2)) + 1);
+	if (!str)
+		return (NULL);
+	while (s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	while (s2[j])
+		str[i++] = s2[j++];
+	str[i] = '\0';
+	free(s1);
+	return (str);
+}
+
+char	*trim_until_newline(char *str)
+{
 	char	*res;
+	int		i;
+	int		k;
 
 	i = 0;
 	k = 0;
-	while (str[i] != '\0' && str[i] != '\n')
+	while (str[i] != '\n' && str[i] != '\0')
 		i++;
 	if (str[i] == '\0')
 	{
 		free(str);
 		return (NULL);
 	}
-	res = ft_calloc((ft_strlen(str) - i), sizeof(char));
+	res = ft_calloc(ft_strlen(str) - i, sizeof(char));
 	i++;
 	while (str[i] != '\0')
 		res[k++] = str[i++];
@@ -35,15 +60,15 @@ char	*trim_untilnewline(char *str)
 	return (res);
 }
 
-char	*trim_afternewline(char *str)
+char	*trim_after_newline(char *str)
 {
-	int		i;
 	char	*res;
+	int		i;
 
 	i = 0;
 	if (str[i] == 0)
 		return (NULL);
-	while (str[i] != '\n' && str[i] != '\0')
+	while (str[i] != '\0' && str[i] != '\n')
 		i++;
 	res = ft_calloc(i + 2, sizeof(char));
 	i = 0;
@@ -57,26 +82,28 @@ char	*trim_afternewline(char *str)
 	return (res);
 }
 
-char	*read_str(int fd, char *str)
+char	*read_file_and_reset_str(int fd, char *str)
 {
 	char	*buf;
-	int		chars_read;
+	int		n;
 
 	if (!str)
 		str = ft_calloc(1, 1);
-	buf = ft_calloc(1, 1);
-	chars_read = 43;
+	buf = malloc(BUFFER_SIZE + 1);
+	if (!buf)
+		return (NULL);
+	n = 42;
 	while (!ft_strchr(str, '\n'))
 	{
-		chars_read = read(fd, buf, BUFFER_SIZE);
-		if (chars_read == -1)
+		n = read(fd, buf, BUFFER_SIZE);
+		if (n == -1)
 		{
 			free(buf);
 			return (NULL);
 		}
-		if (chars_read == 0)
+		if (n == 0)
 			break ;
-		buf[chars_read] = '\0';
+		buf[n] = '\0';
 		str = ft_strjoin_gnl(str, buf);
 	}
 	free(buf);
@@ -85,8 +112,8 @@ char	*read_str(int fd, char *str)
 
 char	*get_next_line(int fd)
 {
-	static char	*str;
 	char		*line;
+	static char	*str;
 
 	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, 0, 0) < 0)
 	{
@@ -94,41 +121,29 @@ char	*get_next_line(int fd)
 		str = NULL;
 		return (NULL);
 	}
-	str = read_str(fd, str);
+	str = read_file_and_reset_str(fd, str);
 	if (str == NULL)
 		return (NULL);
-	line = trim_afternewline(str);
-	str = trim_untilnewline(str);
+	line = trim_after_newline(str);
+	str = trim_until_newline(str);
 	return (line);
 }
 /*
-#include <fcntl.h>
-#include <stdio.h>
-int	main(void)
+int	main(int argc, char **argv)
 {
-	int		fd;
-	int		count;
-	char	*next_line;
-	char	*path;
+	int fd = open(argv[1], O_RDONLY);
+	char *line;
+	int i = 1;
 
-	count = 1;
-	path = "1charfile.txt";
-	fd = open(path, O_RDONLY);
-	if (fd == -1)
+	while (i < 15)
 	{
-		perror("Error opening file");
-		return (1);
-	}
-	while (count < 10)
-	{
-		next_line = get_next_line(fd);
-		if (next_line == NULL)
+		line = get_next_line(fd);
+		if (line == NULL)
 			break ;
-		printf("%d: %s", count, next_line);
-		count++;
-		free(next_line);
+		printf("%d) %s", i, line);
+		free(line);
+		i++;
 	}
 	close(fd);
 	return (0);
-}
-*/
+}*/
