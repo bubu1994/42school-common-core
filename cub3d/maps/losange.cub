@@ -1,0 +1,21 @@
+NO ./textures/Bricks.xpm
+SO ./textures/Gold1.xpm
+WE ./textures/WoolSnow.xpm
+EA ./textures/TilledSoil.xpm
+
+F 125,125,125
+C 55,26,246
+
+      1
+     101
+    10001
+   1000001
+  100000001
+ 10000000001
+100000S000001
+ 10000000001
+  100000001
+   1000001
+    10001
+     101
+      1

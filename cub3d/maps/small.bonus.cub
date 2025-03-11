@@ -1,0 +1,16 @@
+NO ./textures/Glass.xpm
+SO ./textures/LavaF3.xpm
+WE ./textures/Bricks.xpm
+EA ./textures/TilledSoil.xpm
+
+
+F 125,125,125
+C 55,26,246
+
+
+11111111111
+10000001001
+100E0002001
+10000001111
+10000000001
+11111111111

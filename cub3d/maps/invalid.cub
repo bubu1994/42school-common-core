@@ -1,0 +1,15 @@
+
+NO ./textures/Bricks.xpm
+
+SO ./textures/Gold1.xpm
+WE ./textures/WoolSnow.xpm
+EA ./textures/TilledSoil.xpm
+
+
+F 20,100,55
+C 0,80,256
+
+111
+ 101
+1N1
+ 1
